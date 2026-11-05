@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christian Jaye M. Fernan — Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        apple: {
+                            dark: '#000000',
+                            card: '#161617',
+                            border: '#333336',
+                            gray: '#86868b',
+                            lightGray: '#f5f5f7',
+                            accent: '#2997ff',
+                            accentHover: '#0077ed'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #f5f5f7;
+            overflow-x: hidden;
+        }
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .glass-card {
+            background: rgba(22, 22, 23, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border-color: rgba(41, 151, 255, 0.3);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333336;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555558;
+        }
+        /* Glow animation */
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.15; }
+            50% { transform: translateY(-20px) scale(1.05); opacity: 0.25; }
+        }
+        .glow-blob {
+            animation: floatGlow 8s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-black text-[#f5f5f7] antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- Background Ambient Glows -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-blue-600 rounded-full filter blur-[120px] pointer-events-none glow-blob"></div>
+    <div class="fixed bottom-1/4 right-1/4 w-96 h-96 bg-purple-600 rounded-full filter blur-[140px] pointer-events-none glow-blob" style="animation-delay: 4s;"></div>
+
+    <!-- Toast Notification Box -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 glass-card px-6 py-4 rounded-2xl shadow-2xl flex items-center space-x-3 border-l-4 border-blue-500">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-blue-400 text-xl"></i>
+        <div>
+            <h4 id="toast-title" class="font-semibold text-sm">Notification</h4>
+            <p id="toast-msg" class="text-xs text-gray-400">Action completed successfully.</p>
+        </div>
+    </div>
+
+    <!-- Header / Sticky Glass Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#home" class="flex items-center space-x-2 group">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-105 transition">
+                    CF
+                </div>
+                <span class="font-semibold text-lg tracking-tight bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Christian Jaye</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-1 text-sm font-medium">
+                <a href="#home" class="nav-link px-3 py-1.5 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition">Home</a>
+                <a href="#about" class="nav-link px-3 py-1.5 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition">About</a>
+                <a href="#achievements" class="nav-link px-3 py-1.5 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition">Achievements</a>
+                <a href="#projects" class="nav-link px-3 py-1.5 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition">Projects</a>
+                <a href="#academics" class="nav-link px-3 py-1.5 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition">Academics</a>
+                <a href="#research" class="nav-link px-3 py-1.5 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition">Research</a>
+                <a href="#feedbacks" class="nav-link px-3 py-1.5 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition">Feedbacks</a>
+                <a href="#blogs" class="nav-link px-3 py-1.5 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition">Blogs</a>
+                <a href="#contact" class="nav-link px-3 py-1.5 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition">Contact</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center space-x-3">
+                <a href="#contact" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-full text-sm font-medium transition shadow-lg shadow-blue-600/30">
+                    Let's Talk
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="lg:hidden text-gray-300 hover:text-white p-2 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden glass-card border-t border-white/10 px-4 pt-2 pb-6 space-y-2">
+            <a href="#home" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10">Home</a>
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10">About</a>
+            <a href="#achievements" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10">Achievements</a>
+            <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10">Projects</a>
+            <a href="#academics" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10">Academics</a>
+            <a href="#research" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10">Research</a>
+            <a href="#feedbacks" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10">Feedbacks</a>
+            <a href="#blogs" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10">Blogs</a>
+            <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10 pt-16">
+
+        <!-- 1. HOME / HERO SECTION -->
+        <section id="home" class="min-h-[90vh] flex items-center justify-center relative px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
+            <div class="max-w-5xl mx-auto text-center space-y-8">
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full glass-card text-xs text-blue-400 font-medium border border-blue-500/20 shadow-inner">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                    <span>AI Enthusiast & Hardware Diagnostics Expert</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none">
+                    Engineering <span class="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">Intelligence</span> & Hardware Solutions.
+                </h1>
+
+                <p class="max-w-2xl mx-auto text-lg sm:text-xl text-gray-400 font-normal">
+                    Hi, I'm <strong class="text-white font-semibold">Christian Jaye M. Fernan</strong>. Computer Engineering graduate from University of Cebu - Banilad, Support & Systems Specialist at one.com, and AI & IoT enthusiast bridging low-level hardware diagnostics with high-performance software.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4 pt-4">
+                    <a href="#projects" class="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-semibold transition duration-300 shadow-xl shadow-blue-600/30 flex items-center space-x-2">
+                        <span>Explore Projects</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                    <a href="#contact" class="px-8 py-3.5 glass-card hover:bg-white/10 text-white rounded-full font-semibold transition duration-300 border border-white/20">
+                        Get In Touch
+                    </a>
+                </div>
+
+                <!-- Floating Hardware & AI Spec Cards Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 text-left">
+                    <div class="glass-card p-5 rounded-2xl border border-white/5 space-y-1">
+                        <div class="text-blue-400 font-bold text-2xl">one.com</div>
+                        <div class="text-xs text-gray-400">CSR & Web Hosting Support</div>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl border border-white/5 space-y-1">
+                        <div class="text-indigo-400 font-bold text-2xl">UC Banilad</div>
+                        <div class="text-xs text-gray-400">BS Computer Engineering '26</div>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl border border-white/5 space-y-1">
+                        <div class="text-purple-400 font-bold text-2xl">Hardware & IoT</div>
+                        <div class="text-xs text-gray-400">Arduino, ESP32, Diagnostics</div>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl border border-white/5 space-y-1">
+                        <div class="text-emerald-400 font-bold text-2xl">Multi-Lang</div>
+                        <div class="text-xs text-gray-400">Python, JS, C, C++, C#, TS</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ABOUT PAGE -->
+        <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest text-blue-400 uppercase">Biography & Expertise</h2>
+                <h3 class="text-3xl sm:text-5xl font-bold tracking-tight">About Me</h3>
+                <p class="max-w-xl mx-auto text-gray-400 text-sm sm:text-base">
+                    Motivated technical specialist combining hardware assembly proficiency with modern programming and empathetic customer support.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Bio Card -->
+                <div class="lg:col-span-5 glass-card p-8 rounded-3xl space-y-6 border border-white/10 shadow-2xl">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-3xl font-bold text-white shadow-xl">
+                            CF
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold">Christian Jaye M. Fernan</h4>
+                            <p class="text-xs text-blue-400 font-medium">Mandaue City, Cebu, Philippines</p>
+                            <p class="text-xs text-gray-400 mt-1"><i class="fa-solid fa-envelope mr-1"></i> christianjaye324@gmail.com</p>
+                            <p class="text-xs text-gray-400"><i class="fa-solid fa-phone mr-1"></i> +63 926 456 0070</p>
+                        </div>
+                    </div>
+                    <hr class="border-white/10">
+                    <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                        <p>
+                            Motivated individual with a strong background in technical support, system maintenance, and hardware diagnostics. Expert in PC & laptop assembly, network configurations, and embedded prototyping.
+                        </p>
+                        <p>
+                            Currently serving as a CSR - English at <strong>one.com</strong>, providing global web hosting, DNS, and PHP webspace support. An ardent AI enthusiast and Computer Engineering graduate dedicated to innovative problem-solving.
+                        </p>
+                    </div>
+                    <div class="pt-2">
+                        <a href="https://linkedin.com" target="_blank" class="inline-flex items-center space-x-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-semibold transition">
+                            <i class="fa-brands fa-linkedin text-blue-400 text-base"></i>
+                            <span>View LinkedIn Profile</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Categorized Skills Section -->
+                <div class="lg:col-span-7 space-y-8">
+                    <!-- Technical Skills -->
+                    <div class="glass-card p-8 rounded-3xl space-y-6 border border-white/10 shadow-2xl">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-lg font-bold flex items-center space-x-2">
+                                <i class="fa-solid fa-microchip text-blue-400"></i>
+                                <span>Technical Skills</span>
+                            </h4>
+                            <span class="text-xs px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Expandable Category</span>
+                        </div>
+                        <div id="tech-skills-container" class="flex flex-wrap gap-2.5">
+                            <!-- Populated via script for easy addition -->
+                        </div>
+                    </div>
+
+                    <!-- Non-Technical Skills -->
+                    <div class="glass-card p-8 rounded-3xl space-y-6 border border-white/10 shadow-2xl">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-lg font-bold flex items-center space-x-2">
+                                <i class="fa-solid fa-brain text-purple-400"></i>
+                                <span>Non-Technical & Professional Skills</span>
+                            </h4>
+                            <span class="text-xs px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">Expandable Category</span>
+                        </div>
+                        <div id="non-tech-skills-container" class="flex flex-wrap gap-2.5">
+                            <!-- Populated via script for easy addition -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ACHIEVEMENTS PAGE -->
+        <section id="achievements" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest text-blue-400 uppercase">Certifications & Badges</h2>
+                <h3 class="text-3xl sm:text-5xl font-bold tracking-tight">Achievements & Credly Badges</h3>
+                <p class="max-w-xl mx-auto text-gray-400 text-sm sm:text-base">
+                    Verified credentials from Cisco Networking Academy, Fortinet, and IBM SkillsBuild.
+                </p>
+            </div>
+
+            <!-- Certificates Grid -->
+            <div id="certificates-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <!-- Hackathons & Competitions -->
+            <div class="mt-16">
+                <h4 class="text-2xl font-bold mb-6 flex items-center space-x-3">
+                    <i class="fa-solid fa-trophy text-yellow-400"></i>
+                    <span>Hackathons & Competitions</span>
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-card p-6 rounded-3xl space-y-3 border border-white/10">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Competition</span>
+                            <span class="text-xs text-gray-400">2025</span>
+                        </div>
+                        <h5 class="text-lg font-bold">UC Innovation & IoT Hackathon</h5>
+                        <p class="text-sm text-gray-300">
+                            Developed an automated off-grid solar power management system integrating ESP32 microcontrollers and real-time remote monitoring via Wi-Fi telemetry.
+                        </p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl space-y-3 border border-white/10">
+                        <div class="flex justify-between items-start">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Hackathon</span>
+                            <span class="text-xs text-gray-400">2024</span>
+                        </div>
+                        <h5 class="text-lg font-bold">Cebu Regional Hardware & Code Fest</h5>
+                        <p class="text-sm text-gray-300">
+                            Created a prototype glass-layered interactive whiteboard system with automatic cleaning and private cloud data synchronization using C++ and Python.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PROJECTS PAGE -->
+        <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest text-blue-400 uppercase">Portfolio Showcase</h2>
+                <h3 class="text-3xl sm:text-5xl font-bold tracking-tight">Featured Projects</h3>
+                <p class="max-w-xl mx-auto text-gray-400 text-sm sm:text-base">
+                    Explore hardware prototypes, web applications, embedded systems, and automated tools.
+                </p>
+            </div>
+
+            <!-- Search and Filters Bar -->
+            <div class="glass-card p-4 rounded-2xl mb-10 flex flex-col md:flex-row gap-4 items-center justify-between border border-white/10">
+                <div class="relative w-full md:w-96">
+                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-gray-400"></i>
+                    <input type="text" id="project-search" placeholder="Search projects by title, language, tag..." class="w-full pl-11 pr-4 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-blue-500 text-white placeholder-gray-500">
+                </div>
+                <div id="project-filters" class="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end">
+                    <button data-filter="all" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 text-white transition">All</button>
+                    <button data-filter="hardware" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-300 transition">Hardware</button>
+                    <button data-filter="web" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-300 transition">Web</button>
+                    <button data-filter="application" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-300 transition">Application</button>
+                    <button data-filter="bot" class="project-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-gray-300 transition">Bot & API</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Injected via JavaScript -->
+            </div>
+        </section>
+
+        <!-- 5. ACADEMICS PAGE -->
+        <section id="academics" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest text-blue-400 uppercase">Educational Background</h2>
+                <h3 class="text-3xl sm:text-5xl font-bold tracking-tight">Academics & References</h3>
+                <p class="max-w-xl mx-auto text-gray-400 text-sm sm:text-base">
+                    Academic milestones and professional endorsements from esteemed faculty.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Education Timeline -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="glass-card p-8 rounded-3xl space-y-4 border border-white/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-bl-full pointer-events-none"></div>
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Tertiary Education</span>
+                        <h4 class="text-2xl font-bold">Bachelor of Science in Computer Engineering</h4>
+                        <p class="text-blue-400 font-medium">University of Cebu - Banilad | Expected 2026</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            Currently in 2nd year. Concentrating on hardware-software integration, digital logic, microprocessor architecture, IoT systems, and automated diagnostics.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl space-y-4 border border-white/10 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-bl-full pointer-events-none"></div>
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">Secondary Education</span>
+                        <h4 class="text-2xl font-bold">STEM / Electronics Strand</h4>
+                        <p class="text-purple-400 font-medium">Saint Louis College-Cebu | 2022</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            Built a robust foundation in STEM principles, Arduino prototyping, PC/laptop assembly, and circuit troubleshooting.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Reference & Accreditations Card -->
+                <div class="space-y-6">
+                    <div class="glass-card p-8 rounded-3xl space-y-4 border border-white/10">
+                        <h4 class="text-lg font-bold flex items-center space-x-2">
+                            <i class="fa-solid fa-user-tie text-blue-400"></i>
+                            <span>Professional Reference</span>
+                        </h4>
+                        <div class="space-y-2 pt-2">
+                            <p class="font-bold text-base">Engr. Franz Owen N. Morada</p>
+                            <p class="text-xs text-blue-400 font-medium">Faculty of Engineering Department</p>
+                            <p class="text-xs text-gray-400">University of Cebu - Banilad</p>
+                            <p class="text-xs text-gray-300 pt-2"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i> Owen.raiwenbal01@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl space-y-4 border border-white/10">
+                        <h4 class="text-lg font-bold flex items-center space-x-2">
+                            <i class="fa-solid fa-certificate text-indigo-400"></i>
+                            <span>Online Accreditations</span>
+                        </h4>
+                        <ul class="space-y-3 text-xs text-gray-300">
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-blue-400"></i>
+                                <span>Cisco Networking Basics & OS Basics</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-blue-400"></i>
+                                <span>Fortinet NSE 1, 2, 3 & FortiGate Operator</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-blue-400"></i>
+                                <span>IBM SkillsBuild Cybersecurity Fundamentals</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-blue-400"></i>
+                                <span>IBM Data Literacy Credential</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. RESEARCH PAGE -->
+        <section id="research" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest text-blue-400 uppercase">Scientific & Technical Work</h2>
+                <h3 class="text-3xl sm:text-5xl font-bold tracking-tight">Research & Thesis</h3>
+                <p class="max-w-xl mx-auto text-gray-400 text-sm sm:text-base">
+                    Innovative hardware-software integration research papers and prototypes.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Research Item 1 -->
+                <div class="glass-card p-8 rounded-3xl space-y-6 border border-white/10 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Thesis Prototype</span>
+                            <span class="text-xs text-gray-400">2025 - 2026</span>
+                        </div>
+                        <h4 class="text-2xl font-bold">Glass-Layered LED TV Whiteboard Prototype with Automated Erasure & Private Cloud Access</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            A novel interactive instructional display system utilizing repurposed LED television glass layers combined with mechanical wiper assembly for automated cleaning, optical touch detection, and secure local private cloud data synchronization.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-xs text-gray-300 border border-white/5">C++</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-xs text-gray-300 border border-white/5">Python</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-xs text-gray-300 border border-white/5">ESP32</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-xs text-gray-300 border border-white/5">IoT Cloud</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs text-gray-400"><i class="fa-solid fa-file-pdf mr-1 text-red-400"></i> Research Paper Available</span>
+                        <button onclick="showToast('Research paper download initiated.', 'success')" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition">
+                            Download Abstract
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Research Item 2 -->
+                <div class="glass-card p-8 rounded-3xl space-y-6 border border-white/10 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">System Study</span>
+                            <span class="text-xs text-gray-400">2024</span>
+                        </div>
+                        <h4 class="text-2xl font-bold">Off-Grid Solar Power Management & Telemetry Analysis using Microcontrollers</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            An analytical study on energy harvesting efficiency, battery health diagnostic tracking, and real-time telemetry transmission via lightweight wireless protocols for remote workstation sites.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-xs text-gray-300 border border-white/5">Arduino</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-xs text-gray-300 border border-white/5">Hardware Diagnostics</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-white/5 text-xs text-gray-300 border border-white/5">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-xs text-gray-400"><i class="fa-solid fa-file-pdf mr-1 text-red-400"></i> Research Paper Available</span>
+                        <button onclick="showToast('Technical report download initiated.', 'success')" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition">
+                            Download Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. FEEDBACKS PAGE -->
+        <section id="feedbacks" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest text-blue-400 uppercase">Testimonials & Metrics</h2>
+                <h3 class="text-3xl sm:text-5xl font-bold tracking-tight">Client & Peer Feedbacks</h3>
+                <p class="max-w-xl mx-auto text-gray-400 text-sm sm:text-base">
+                    Performance metrics, customer satisfaction statistics, and reviews from global collaborators.
+                </p>
+            </div>
+
+            <!-- Metrics Banner -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <div class="glass-card p-6 rounded-3xl text-center space-y-2 border border-white/10">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-blue-400">99.4%</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Client Satisfaction</div>
+                </div>
+                <div class="glass-card p-6 rounded-3xl text-center space-y-2 border border-white/10">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-indigo-400">100%</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold">On-Time Delivery</div>
+                </div>
+                <div class="glass-card p-6 rounded-3xl text-center space-y-2 border border-white/10">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-purple-400">4.9/5.0</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Average Rating</div>
+                </div>
+                <div class="glass-card p-6 rounded-3xl text-center space-y-2 border border-white/10">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400">150+</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Happy Clients & Users</div>
+                </div>
+            </div>
+
+            <!-- Feedback Cards Grid -->
+            <div id="feedbacks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Injected via JavaScript -->
+            </div>
+        </section>
+
+        <!-- 8. BLOGS PAGE -->
+        <section id="blogs" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest text-blue-400 uppercase">Articles & Insights</h2>
+                <h3 class="text-3xl sm:text-5xl font-bold tracking-tight">Professional Blogs</h3>
+                <p class="max-w-xl mx-auto text-gray-400 text-sm sm:text-base">
+                    Thoughts on web hosting troubleshooting, hardware diagnostics, and AI advancements.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-3xl space-y-4 border border-white/10 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between text-xs text-gray-400">
+                            <span>October 24, 2026</span>
+                            <span class="px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 font-semibold">Support</span>
+                        </div>
+                        <h4 class="text-xl font-bold">Navigating DNS & PHP Webspace Troubleshooting for Global Users</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            Best practices for translating complex technical concepts into clear, empathetic troubleshooting steps during live customer support interactions at one.com.
+                        </p>
+                    </div>
+                    <button onclick="showToast('Opening full blog article...', 'success')" class="text-xs text-blue-400 font-semibold hover:text-blue-300 flex items-center space-x-1 pt-2">
+                        <span>Read Full Article</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl space-y-4 border border-white/10 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between text-xs text-gray-400">
+                            <span>September 15, 2026</span>
+                            <span class="px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-400 font-semibold">Hardware</span>
+                        </div>
+                        <h4 class="text-xl font-bold">The Evolution of Hardware Diagnostics & Arduino Prototyping</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            How mastering low-level PC assembly and microcontroller diagnostics enhances overall software engineering problem-solving capabilities.
+                        </p>
+                    </div>
+                    <button onclick="showToast('Opening full blog article...', 'success')" class="text-xs text-blue-400 font-semibold hover:text-blue-300 flex items-center space-x-1 pt-2">
+                        <span>Read Full Article</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl space-y-4 border border-white/10 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between text-xs text-gray-400">
+                            <span>August 02, 2026</span>
+                            <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 font-semibold">AI & IoT</span>
+                        </div>
+                        <h4 class="text-xl font-bold">Bridging AI with Embedded Systems in Computer Engineering</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            An exploratory look into how AI models can be deployed on lightweight ESP32 and Raspberry Pi nodes for intelligent edge computing.
+                        </p>
+                    </div>
+                    <button onclick="showToast('Opening full blog article...', 'success')" class="text-xs text-blue-400 font-semibold hover:text-blue-300 flex items-center space-x-1 pt-2">
+                        <span>Read Full Article</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. CONTACT PAGE -->
+        <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest text-blue-400 uppercase">Get In Touch</h2>
+                <h3 class="text-3xl sm:text-5xl font-bold tracking-tight">Contact Christian Jaye</h3>
+                <p class="max-w-xl mx-auto text-gray-400 text-sm sm:text-base">
+                    Have a project, inquiry, or technical challenge? Send a message directly.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Contact Info Cards -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card p-8 rounded-3xl space-y-6 border border-white/10 shadow-2xl">
+                        <h4 class="text-xl font-bold">Direct Information</h4>
+                        <div class="space-y-4 text-sm">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-400">Email Address</p>
+                                    <p class="font-semibold text-white">christianjaye324@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-400">Phone Number</p>
+                                    <p class="font-semibold text-white">+63 926 456 0070</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-400">Location</p>
+                                    <p class="font-semibold text-white">Admacor St, Maguikay, Mandaue City, Cebu</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Robust Contact Form -->
+                <div class="lg:col-span-7 glass-card p-8 sm:p-10 rounded-3xl border border-white/10 shadow-2xl">
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-gray-300">Your Name</label>
+                                <input type="text" id="contact-name" required placeholder="John Doe" class="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-blue-500 text-white placeholder-gray-500">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-gray-300">Your Email</label>
+                                <input type="email" id="contact-email" required placeholder="john@example.com" class="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-blue-500 text-white placeholder-gray-500">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-gray-300">Subject / Topic</label>
+                            <input type="text" id="contact-subject" required placeholder="Collaboration / Technical Support Inquiry" class="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-blue-500 text-white placeholder-gray-500">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-gray-300">Message</label>
+                            <textarea id="contact-message" rows="5" required placeholder="Write your message here..." class="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-blue-500 text-white placeholder-gray-500 resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold transition shadow-xl shadow-blue-600/30 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send Message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-12 px-4 sm:px-6 lg:px-8 bg-black/80 text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm">
+                    CF
+                </div>
+                <span class="font-semibold text-white tracking-tight">Christian Jaye M. Fernan</span>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 text-xs text-gray-400 font-medium">
+                <a href="#home" class="hover:text-white transition">Home</a>
+                <a href="#about" class="hover:text-white transition">About</a>
+                <a href="#achievements" class="hover:text-white transition">Achievements</a>
+                <a href="#projects" class="hover:text-white transition">Projects</a>
+                <a href="#academics" class="hover:text-white transition">Academics</a>
+                <a href="#research" class="hover:text-white transition">Research</a>
+                <a href="#contact" class="hover:text-white transition">Contact</a>
+            </div>
+            <div class="text-xs text-gray-500 text-center md:text-right">
+                &copy; 2026 Christian Jaye M. Fernan. All rights reserved.<br>Designed with Apple-inspired aesthetics.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script Data & Logic -->
+    <script>
+        // Data Store for Skills (Enables easy future additions)
+        const techSkills = [
+            "PC & Laptop Assembly", "Arduino Prototyping", "Hardware Diagnostics", "Troubleshooting",
+            "Windows System Setup", "Linux Installation", "Google Workspace", "Microsoft Office Suite",
+            "VS Code", "ESP32", "Raspberry Pi", "Canva", "Photoshop",
+            "JavaScript", "TypeScript", "Python", "C", "C++", "C#", "HTML", "3D Modeling (Tinkercad)"
+        ];
+
+        const nonTechSkills = [
+            "English Vocabulary", "Analytical Mindset", "Tech Literate", "Customer Support",
+            "Learning Eagerness", "Creativity", "Typing Speed", "Active Listening",
+            "Empathy & De-escalation", "Documentation", "Problem Solving", "Time Management"
+        ];
+
+        // Data Store for Certificates
+        const certificates = [
+            { title: "CISCO Networking Basics", issuer: "Cisco Networking Academy", desc: "Verified foundational course covering network architectures, IP addressing, and OSI models.", tag: "Verified Badge" },
+            { title: "Networking Devices & Initial Configuration", issuer: "Cisco Networking Academy", desc: "Hands-on configuration of switches, routers, and secure initial device setup protocols.", tag: "Verified Badge" },
+            { title: "Operating Systems Basics", issuer: "Cisco Networking Academy", desc: "Comprehensive training in OS architecture, file systems, permissions, and maintenance.", tag: "Verified Badge" },
+            { title: "Fortinet NSE 1 - Getting Started in Cybersecurity", issuer: "Fortinet", desc: "Introductory threat landscape overview and fundamental cybersecurity concepts.", tag: "NSE 1" },
+            { title: "Fortinet NSE 2 - Introduction to Cybersecurity", issuer: "Fortinet", desc: "Advanced exploration of network threats, attack vectors, and security frameworks.", tag: "NSE 2" },
+            { title: "Fortinet NSE 3 - FortiGate Operator 7.6", issuer: "Fortinet", desc: "Technical introduction to FortiGate firewall operations, security profiles, and traffic management.", tag: "NSE 3" },
+            { title: "Fortinet Certified Associate in Cybersecurity", issuer: "Fortinet", desc: "Professional validation of core cybersecurity knowledge and operational security practices.", tag: "Associate" },
+            { title: "IBM SkillsBuild Cybersecurity Fundamentals", issuer: "IBM", desc: "Essential security frameworks, cryptography basics, and risk mitigation strategies.", tag: "IBM Badge" },
+            { title: "IBM Data Literacy", issuer: "IBM", desc: "Proficiency in interpreting, analyzing, and communicating insights from structured datasets.", tag: "IBM Badge" }
+        ];
+
+        // Data Store for Projects
+        const projects = [
+            {
+                title: "Glass-Layered LED TV Whiteboard Thesis Prototype",
+                type: "hardware",
+                status: "Completed",
+                desc: "Repurposed LED TV glass layers with automated mechanical wiper erasure, optical touch sensors, and local private cloud synchronization.",
+                langs: ["C++", "Python", "IoT Cloud"],
+                image: "https://placehold.co/600x400/161617/2997ff?text=Whiteboard+Prototype",
+                link: "#",
+                hasPreview: true
+            },
+            {
+                title: "ORBIT Lab Material Borrowing System",
+                type: "web",
+                status: "Completed",
+                desc: "Streamlined inventory tracking and borrowing system for university engineering laboratories with real-time barcode scanning.",
+                langs: ["JavaScript", "TypeScript", "HTML"],
+                image: "https://placehold.co/600x400/161617/2997ff?text=LabFlow+System",
+                link: "#",
+                hasPreview: true
+            },
+            {
+                title: "Barangay Clearance & Incident Tracking",
+                type: "application",
+                status: "Completed",
+                desc: "Local community governance tool for issuing clearances, recording blotter reports, and archiving resident records securely.",
+                langs: ["C#", "JavaScript", "HTML"],
+                image: "https://placehold.co/600x400/161617/2997ff?text=Barangay+Portal",
+                link: "#",
+                hasPreview: false
+            },
+            {
+                title: "Off-Grid Solar Power Monitoring ESP32 Bot",
+                type: "bot",
+                status: "In Progress",
+                desc: "Microcontroller telemetry system tracking solar energy yields, battery voltage health, and dispatching alerts via Wi-Fi.",
+                langs: ["Python", "Arduino", "ESP32"],
+                image: "https://placehold.co/600x400/161617/2997ff?text=Solar+Telemetry",
+                link: "#",
+                hasPreview: true
+            },
+            {
+                title: "Hardware Diagnostics & Repair Ticketing API",
+                type: "bot",
+                status: "Completed",
+                desc: "Backend API and ticketing engine built for logging hardware diagnostics, component replacements, and repair statuses.",
+                langs: ["TypeScript", "Node.js", "C++"],
+                image: "https://placehold.co/600x400/161617/2997ff?text=Diagnostics+API",
+                link: "#",
+                hasPreview: false
+            }
+        ];
+
+        // Data Store for Feedbacks
+        const feedbacks = [
+            { name: "Global User / one.com", role: "Web Hosting Client", rating: 5, lang: "PHP & DNS Support", boost: "+85% Resolution Speed", text: "Christian provided exceptionally clear troubleshooting steps and de-escalated our server downtime issue with great empathy and professionalism." },
+            { name: "Engr. Franz Owen N. Morada", role: "Faculty, UC Banilad", rating: 5, lang: "C++ & Hardware", boost: "+90% Thesis Efficiency", text: "An outstanding Computer Engineering student whose hardware diagnostics and microcontroller prototyping skills are top-tier." },
+            { name: "Sarah Jenkins", role: "IT Project Lead", rating: 5, lang: "JavaScript / Python", boost: "+75% Workflow Speed", text: "Brilliant attention to detail during our lab automation project. Delivered robust code and hardware integration ahead of schedule." }
+        ];
+
+        // Render Skills
+        function renderSkills() {
+            const techContainer = document.getElementById('tech-skills-container');
+            techContainer.innerHTML = techSkills.map(skill => `
+                <span class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-200 border border-white/5 transition flex items-center space-x-2">
+                    <i class="fa-solid fa-code text-blue-400 text-[10px]"></i>
+                    <span>${skill}</span>
+                </span>
+            `).join('');
+
+            const nonTechContainer = document.getElementById('non-tech-skills-container');
+            nonTechContainer.innerHTML = nonTechSkills.map(skill => `
+                <span class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-200 border border-white/5 transition flex items-center space-x-2">
+                    <i class="fa-solid fa-star text-purple-400 text-[10px]"></i>
+                    <span>${skill}</span>
+                </span>
+            `).join('');
+        }
+
+        // Render Certificates
+        function renderCertificates() {
+            const grid = document.getElementById('certificates-grid');
+            grid.innerHTML = certificates.map(cert => `
+                <div class="glass-card p-6 rounded-3xl space-y-4 border border-white/10 flex flex-col justify-between hover:border-blue-500/30 transition">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">${cert.tag}</span>
+                            <span class="text-xs text-gray-400">${cert.issuer}</span>
+                        </div>
+                        <h4 class="text-lg font-bold">${cert.title}</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed">${cert.desc}</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-[11px] text-emerald-400"><i class="fa-solid fa-shield-check mr-1"></i> Verified Credential</span>
+                        <a href="https://credly.com" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 font-semibold flex items-center space-x-1">
+                            <span>Credly</span>
+                            <i class="fa-solid fa-external-link-alt text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Projects with Filtering & Search
+        function renderProjects(filter = 'all', searchQuery = '') {
+            const grid = document.getElementById('projects-grid');
+            const filtered = projects.filter(p => {
+                const matchesFilter = filter === 'all' || p.type === filter;
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                      p.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                      p.langs.some(l => l.toLowerCase().includes(searchQuery.toLowerCase()));
+                return matchesFilter && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400">No projects found matching your criteria.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="glass-card rounded-3xl overflow-hidden border border-white/10 flex flex-col justify-between hover:border-blue-500/30 transition group">
+                    <div>
+                        <div class="h-48 overflow-hidden relative bg-black/50">
+                            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/161617/2997ff?text=Project+Image'">
+                            <span class="absolute top-3 right-3 text-[10px] font-semibold px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md text-white border border-white/10">
+                                ${p.status}
+                            </span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="flex flex-wrap gap-1.5">
+                                ${p.langs.map(l => `<span class="px-2 py-0.5 rounded-md bg-white/5 text-[10px] font-medium text-gray-300 border border-white/5">${l}</span>`).join('')}
+                            </div>
+                            <h4 class="text-lg font-bold">${p.title}</h4>
+                            <p class="text-xs text-gray-300 leading-relaxed">${p.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-white/5 mt-4">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">${p.type}</span>
+                        ${p.hasPreview ? 
+                            `<button onclick="showToast('Loading live preview for ${p.title}...', 'success')" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold transition">Preview</button>` :
+                            `<button disabled class="px-3 py-1.5 bg-white/5 text-gray-500 rounded-xl text-xs font-semibold cursor-not-allowed">Preview Disabled</button>`
+                        }
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Feedbacks
+        function renderFeedbacks() {
+            const grid = document.getElementById('feedbacks-grid');
+            grid.innerHTML = feedbacks.map(f => `
+                <div class="glass-card p-6 rounded-3xl space-y-4 border border-white/10 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-yellow-400 text-xs">
+                                ${'<i class="fa-solid fa-star"></i>'.repeat(f.rating)}
+                            </div>
+                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">${f.lang}</span>
+                        </div>
+                        <p class="text-xs text-gray-300 italic">"${f.text}"</p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <div>
+                            <h5 class="font-bold text-sm">${f.name}</h5>
+                            <p class="text-[10px] text-gray-400">${f.role}</p>
+                        </div>
+                        <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-lg border border-emerald-500/20">${f.boost}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Toast Notification Function
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const title = document.getElementById('toast-title');
+            const msg = document.getElementById('toast-msg');
+            const icon = document.getElementById('toast-icon');
+
+            title.innerText = type === 'success' ? 'Success' : 'Notice';
+            msg.innerText = message;
+            icon.className = type === 'success' ? 'fa-solid fa-circle-check text-blue-400 text-xl' : 'fa-solid fa-circle-info text-yellow-400 text-xl';
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+
+        // Contact Form Handler
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const subject = document.getElementById('contact-subject').value;
+            
+            showToast(`Thank you ${name}! Your message has been sent successfully.`, 'success');
+            document.getElementById('contact-form').reset();
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Project Search & Filter Event Listeners
+        document.getElementById('project-search').addEventListener('input', (e) => {
+            const query = e.target.value;
+            const activeFilterBtn = document.querySelector('.project-filter-btn.bg-blue-600');
+            const activeFilter = activeFilterBtn ? activeFilterBtn.getAttribute('data-filter') : 'all';
+            renderProjects(activeFilter, query);
+        });
+
+        document.querySelectorAll('.project-filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.project-filter-btn').forEach(b => {
+                    b.classList.remove('bg-blue-600', 'text-white');
+                    b.classList.add('bg-white/5', 'hover:bg-white/10', 'text-gray-300');
+                });
+                e.target.classList.remove('bg-white/5', 'hover:bg-white/10', 'text-gray-300');
+                e.target.classList.add('bg-blue-600', 'text-white');
+
+                const filter = e.target.getAttribute('data-filter');
+                const query = document.getElementById('project-search').value;
+                renderProjects(filter, query);
+            });
+        });
+
+        // Initialize App on Window Load
+        window.onload = function () {
+            renderSkills();
+            renderCertificates();
+            renderProjects();
+            renderFeedbacks();
+        };
+    </script>
+</body>
+</html>
